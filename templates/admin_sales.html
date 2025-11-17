@@ -1,0 +1,7 @@
+<h1>판매 실적</h1>
+
+{% for s in sales %}
+<p>{{ s.round }}회차: {{ s.count }}장 판매 ({{ s.revenue }}원)</p>
+{% endfor %}
+
+<a href="/">홈</a>
