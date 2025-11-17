@@ -1,0 +1,13 @@
+<h1>{{ round }}회차 당첨 결과</h1>
+
+<p>당첨 번호: {{ result.numbers }} + 보너스 {{ result.bonus }}</p>
+
+<h2>내 번호 확인:</h2>
+
+{% for p in user_purchases %}
+<p>{{ p.numbers }}</p>
+{% empty %}
+<p>해당 회차에 구매한 번호가 없습니다.</p>
+{% endfor %}
+
+<a href="/">홈</a>
