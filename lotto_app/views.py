@@ -14,30 +14,23 @@ def index(request):
 
 @login_required
 def buy(request):
-
-    # 최신 회차 없으면 생성
     if not LottoRound.objects.exists():
         LottoRound.objects.create(round=1)
-
     latest_round = LottoRound.objects.latest('round')
 
-    # 자동 번호 생성
     numbers = generate_numbers()
     numbers_str = ",".join(map(str, numbers))
 
-    # 구매 저장
     LottoPurchase.objects.create(
-        user=request.user,
+        user=None,  # 로그인 필요없으므로 사용자 NULL로 처리 가능
         lotto_round=latest_round,
         numbers=numbers_str
     )
 
-    context = {
+    return render(request, "lotto_app/buy.html", {
         "numbers": numbers,
         "round": latest_round.round
-    }
-
-    return render(request, "lotto_app/buy.html", context)
+    })
 
 
 @login_required
